@@ -1,12 +1,13 @@
-const inquirer = require("inquirer");
-const ora = require("ora");
-const chalk = require("chalk");
 const fs = require("fs");
 const path = require("path");
 
-const spinner = ora();
+const inquirer = require("inquirer");
+const ora = require("ora");
+const chalk = require("chalk");
 
 const RECORD_DIR_PATH = path.resolve(__dirname, "notes");
+
+const spinner = ora();
 
 const getFilePath = (timestamp) =>
   path.resolve(__dirname, RECORD_DIR_PATH, `${timestamp}.json`);
@@ -51,7 +52,7 @@ const createNote = () => {
     ])
     .then(({ title, user, type, ddl, confirmed }) => {
       if (!confirmed) {
-        return spinner.succeed(chalk.green("取消保存"));
+        return spinner.succeed(chalk.greenBright("取消保存"));
       }
       const result = `要在 ${ddl} 前 完成 ${title}哦，${user}`;
       spinner.start(`正在写入文件...`);
@@ -63,7 +64,7 @@ const createNote = () => {
         { encoding: "utf-8" },
         (err) => {
           return err
-            ? spinner.fail(chalk.red("写入失败啦..."))
+            ? spinner.fail(chalk.redBright("写入失败啦..."))
             : spinner.succeed(
                 chalk.cyan(
                   `你的备忘事项 ${title} 已保存至 ${RECORD_DIR_PATH}/${current}.json`

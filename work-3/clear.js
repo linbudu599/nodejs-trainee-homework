@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const { promisify } = require("util");
+
 const inquirer = require("inquirer");
 const ora = require("ora");
-const { promisify } = require("util");
 const chalk = require("chalk");
 
 const rmDirPromise = promisify(fs.rmdir);
@@ -17,7 +18,7 @@ const deleteNotes = () => {
       {
         type: "confirm",
         name: "confirmed",
-        message: chalk.red("确认删除所有吗？"),
+        message: chalk.redBright("确认删除所有备忘吗？"),
         default: true,
       },
     ])

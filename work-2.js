@@ -50,9 +50,9 @@ inquirer
           { encoding: "utf-8" },
           (err) => {
             return err
-              ? spinner.fail(chalk.red("写入失败啦..."))
+              ? spinner.fail(chalk.redBright("写入失败啦..."))
               : spinner.succeed(
-                  chalk.cyan(
+                  chalk.cyanBright(
                     `收到你的回答~ 已保存至 ${RECORD_DIR_PATH}/${current}.json`
                   )
                 );

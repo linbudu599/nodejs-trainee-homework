@@ -1,8 +1,9 @@
 const fs = require("fs");
 const path = require("path");
+const { promisify } = require("util");
+
 const Table = require("cli-table");
 const ora = require("ora");
-const { promisify } = require("util");
 const chalk = require("chalk");
 
 const readDirPromise = promisify(fs.readdir);
@@ -12,6 +13,13 @@ const NOTE_DIR_PATH = path.resolve(__dirname, "notes");
 
 const listNotes = () => {
   const spinner = ora().start();
+
+  const noteDirExist = fs.existsSync(NOTE_DIR_PATH);
+
+  if (!noteDirExist) {
+    spinner.fail(chalk.redBright("看起来你还没有创建过note目录..."));
+    process.exit(0);
+  }
 
   const head = ["名称", "用户", "类型", "截止时间"].map((item) =>
     chalk.cyan(item)
@@ -26,7 +34,7 @@ const listNotes = () => {
       let readPromiseGroup = [];
 
       if (!data.length) {
-        console.log(chalk.yellow("看起来你还没有写过备忘录~"));
+        spinner.info(chalk.yellowBright("看起来你还没有写过备忘录~"));
         process.exit(0);
       }
 
@@ -45,7 +53,7 @@ const listNotes = () => {
       }
       spinner.succeed("读取文件完成~");
 
-      console.log(chalk.green(table.toString()));
+      console.log(chalk.greenBright(table.toString()));
     });
 };
 

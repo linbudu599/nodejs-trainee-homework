@@ -36,7 +36,7 @@ inquirer
       })
     );
     console.log(
-      chalk.cyan(
+      chalk.cyanBright(
         `Hi, 对 ${favor} 感兴趣的 ${name} 同学， ${
           confirmed ? "欢迎来到Node.js练习生" : "可要快点准备好奥~"
         }`
