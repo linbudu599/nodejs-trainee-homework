@@ -16,7 +16,7 @@
             "chalk": "^4.1.0",
             "cli-table": "^0.3.4",
             "inquirer": "^7.3.3",
-            "minimist": "^1.2.5",
+            "minimist": "^1.2.8",
             "ora": "^5.1.0"
       }
 }
